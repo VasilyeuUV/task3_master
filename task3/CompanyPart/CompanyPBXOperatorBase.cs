@@ -3,12 +3,12 @@ using task3.PBXPart;
 
 namespace task3.CompanyPart
 {
-    public class PBXOperator
+    public class CompanyPBXOperatorBase
     {
 
         private IEnumerable<PBXBase> _pBXList = null;
 
-        private ServiceDepartment _seviceDepartment = null;
+        private CompanyServiceDepartment _seviceDepartment = null;
 
 
 

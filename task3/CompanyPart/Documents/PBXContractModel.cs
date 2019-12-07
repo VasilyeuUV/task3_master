@@ -22,7 +22,7 @@ namespace task3.CompanyPart.Documents.ContractPart
         /// <summary>
         /// Reference to the Subscriber
         /// </summary>
-        public PBXSubscriber Subscriber { get; private set; } = null;
+        public PBXSubscriberModel Subscriber { get; private set; } = null;
 
 
         /// <summary>

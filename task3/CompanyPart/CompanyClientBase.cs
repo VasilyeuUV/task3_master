@@ -2,7 +2,7 @@
 
 namespace task3.CompanyPart
 {
-    internal class PBXClient : IPBXStatusable
+    internal class CompanyClientBase : IPBXStatusable
     {
 
 

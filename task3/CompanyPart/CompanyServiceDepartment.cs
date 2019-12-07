@@ -1,6 +1,6 @@
 ﻿namespace task3.CompanyPart
 {
-    internal class ServiceDepartment
+    internal class CompanyServiceDepartment
     {
     }
 }

@@ -5,7 +5,7 @@ using task3.PBXPart;
 
 namespace task3.CompanyPart
 {
-    internal class PBXSubscriber : IPBXStatusable
+    internal class PBXSubscriberModel : IPBXStatusable
     {
 
         public int Id { get; set; }
