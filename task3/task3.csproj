@@ -43,6 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HumanPart\PBXClient.cs" />
+    <Compile Include="HumanPart\Human.cs" />
+    <Compile Include="HumanPart\PBXSubscriber.cs" />
+    <Compile Include="Interfaces\IPBXStatusable.cs" />
+    <Compile Include="Interfaces\IPersonalData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
