@@ -12,7 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-	<LangVersion>latest</LangVersion>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -44,14 +44,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompanyPart\Documents\PBXContractModel.cs" />
+    <Compile Include="CompanyPart\PBXOperator.cs" />
+    <Compile Include="CompanyPart\ServiceDepartment.cs" />
+    <Compile Include="CompanyPart\Documents\TariffModel.cs" />
     <Compile Include="PBXPart\ControlDeviceBase.cs" />
     <Compile Include="PBXPart\PBXBase.cs" />
     <Compile Include="PBXPart\SwitchDeviceBase.cs" />
     <Compile Include="PBXPart\SwitchSystemBase.cs" />
-    <Compile Include="PersonPart\PBXClient.cs" />
+    <Compile Include="CompanyPart\PBXClient.cs" />
+    <Compile Include="PBXPart\TerminalBase.cs" />
     <Compile Include="PersonPart\Person.cs" />
-    <Compile Include="PersonPart\PBXSubscriber.cs" />
-    <Compile Include="PersonPart\Interfaces\IPBXStatusable.cs" />
+    <Compile Include="CompanyPart\PBXSubscriber.cs" />
+    <Compile Include="CompanyPart\Interfaces\IPBXStatusable.cs" />
     <Compile Include="PersonPart\Interfaces\IPersonalData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -59,6 +64,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="CompanyPart\DB\BillingPart\" />
+    <Folder Include="CompanyPart\DB\ContractPart\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace task3.PersonPart.Interfaces
+namespace task3.CompanyPart.Interfaces
 {
     interface IPBXStatusable
     {

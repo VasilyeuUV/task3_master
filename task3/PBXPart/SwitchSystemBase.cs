@@ -47,5 +47,24 @@ namespace task3.PBXPart
                               ? new SwitchSystemBase(SWITCHDEVICE_COUNT_DEFAULT) 
                               : new SwitchSystemBase(switchDeviceCount);
 
+
+
+
+        /*
+        КОММУТАТОР 
+        •	Имеет:
+        o	Порты для подключения
+        o	Состояния:
+        	Вкл. / откл.;
+        •	Функционал:
+        o	
+
+        •	Генерируемые события:
+        o	
+
+        •	Обрабатываемые события:
+        o	
+
+        */
     }
 }
