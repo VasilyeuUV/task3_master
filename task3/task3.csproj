@@ -43,16 +43,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HumanPart\PBXClient.cs" />
-    <Compile Include="HumanPart\Human.cs" />
-    <Compile Include="HumanPart\PBXSubscriber.cs" />
-    <Compile Include="Interfaces\IPBXStatusable.cs" />
-    <Compile Include="Interfaces\IPersonalData.cs" />
+    <Compile Include="PersonPart\PBXClient.cs" />
+    <Compile Include="PersonPart\Person.cs" />
+    <Compile Include="PersonPart\PBXSubscriber.cs" />
+    <Compile Include="PersonPart\Interfaces\IPBXStatusable.cs" />
+    <Compile Include="PersonPart\Interfaces\IPersonalData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="PBXPart\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace task3.Interfaces
+﻿namespace task3.PersonPart.Interfaces
 {
 
     /// <summary>
