@@ -12,6 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+	<LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -43,6 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PBXPart\ControlDeviceBase.cs" />
+    <Compile Include="PBXPart\PBXBase.cs" />
+    <Compile Include="PBXPart\SwitchDeviceBase.cs" />
+    <Compile Include="PBXPart\SwitchSystemBase.cs" />
     <Compile Include="PersonPart\PBXClient.cs" />
     <Compile Include="PersonPart\Person.cs" />
     <Compile Include="PersonPart\PBXSubscriber.cs" />
@@ -54,8 +59,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="PBXPart\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
