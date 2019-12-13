@@ -1,30 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace task3.PBXPart
+﻿namespace task3.PBXPart
 {
-    internal class SwitchDeviceBase
+    internal class SwitchDeviceBase : HardwareBase
     {
 
         internal int PortNumber { get; set; } = 0;
-
-        internal bool IsPowered { get; set; } = false;
-
         public bool IsConnected { get; set; } = false;
 
 
-        private SwitchDeviceBase()
+
+        /// <summary>
+        /// CTOR
+        /// </summary>
+        private SwitchDeviceBase(int number)
         {
+            this.PortNumber = number;
         }
 
 
-        internal static SwitchDeviceBase CreateInstance()
+        /// <summary>
+        /// Create new Terminal
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns></returns>
+        internal static SwitchDeviceBase CreateInstance(int number)
         {
-            return new SwitchDeviceBase();
+            return number < 1
+                          ? new SwitchDeviceBase(0)
+                          : new SwitchDeviceBase(number);
         }
+
+
+
+
+
+
 
 
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace task3.PBXPart
 {
@@ -10,42 +6,43 @@ namespace task3.PBXPart
     /// <summary>
     /// PBX Switching system base variant
     /// </summary>
-    internal class SwitchSystemBase
+    internal class SwitchSystemBase : HardwareBase
     {
-
-        private const int SWITCHDEVICE_COUNT_DEFAULT = 20;
-        private IEnumerable<SwitchDeviceBase> _switchDevices = null;
-
 
         /// <summary>
         /// Number of SwitchDevices in SwitchSystem
         /// </summary>
-        internal IEnumerable<SwitchDeviceBase> SwitchDevices => _switchDevices ??= new List<SwitchDeviceBase>();
+        internal IEnumerable<SwitchDeviceBase> SwitchDevices { get; private set; } = null;
 
         
         /// <summary>
         /// CTOR
         /// </summary>
         /// <param name="switchDeviceCount"></param>
-        private SwitchSystemBase(int switchDeviceCount)
+        private SwitchSystemBase()
         {
-            for (int i = 0; i < switchDeviceCount; i++)
-            {
-                ((List<SwitchDeviceBase>)this.SwitchDevices).Add(SwitchDeviceBase.CreateInstance());
-            }
         }
 
-        
+
 
         /// <summary>
         /// Create new SwitchSystem
         /// </summary>
-        /// <param name="switchDeviceCount">number of SwitchDevices</param>
-        /// <returns>new SwitchSystem (the default number of SwitchDevices is 20</returns>
-        internal SwitchSystemBase CreateInstance(int switchDeviceCount = 0) => 
-            switchDeviceCount < 1 
-                              ? new SwitchSystemBase(SWITCHDEVICE_COUNT_DEFAULT) 
-                              : new SwitchSystemBase(switchDeviceCount);
+        /// <param name="switchDeviceCount">number of SwitchDevices in SwitchSystem</param>
+        /// <returns></returns>
+        internal static SwitchSystemBase CreateInstance(int switchDeviceCount = 1)
+        {
+            List<SwitchDeviceBase> lst = new List<SwitchDeviceBase>();
+            for (int i = 0; i < switchDeviceCount; i++)
+            {
+                lst.Add(SwitchDeviceBase.CreateInstance(i + 1));
+            }
+            var swSys = new SwitchSystemBase();
+            swSys.SwitchDevices = lst;
+            return swSys;
+        }
+
+
 
 
 
@@ -53,7 +50,7 @@ namespace task3.PBXPart
         /*
         КОММУТАТОР 
         •	Имеет:
-        o	Порты для подключения
+        o	Список Портjd для подключения
         o	Состояния:
         	Вкл. / откл.;
         •	Функционал:

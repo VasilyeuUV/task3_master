@@ -1,6 +1,71 @@
-﻿namespace task3.CompanyPart
+﻿using task3.PBXPart;
+using task3.PersonPart;
+
+namespace task3.CompanyPart
 {
-    internal class CompanyServiceDepartment
+    public class CompanyServiceDepartment
     {
+
+
+
+
+
+
+
+        private void SubscriberAdd(Person person)
+        {
+            //int contractNumber = GetContract(person) + 1;            // получить номер договора
+            //TerminalBase terminal = GetTerminal(contractNumber);     // закрепить терминал за  
+
+        }
+
+        private void SubscriberRemove(Person person)
+        {
+            //int contractNumber = GetContract(person);            // получить номер договора
+
+            //if (contractNumber < 1)
+            //{
+            //    foreach (var item in collection)
+            //    {
+            //        RemoveContract(item);
+            //    }
+            //    return;
+            //}
+            //RemoveContract(contractNumber);            
+        }
+
+        /*
+           Отдел обслуживания КОМПАНИИ – ОПЕРАТОРА АТС:
+           •	Имеет:
+           o	
+
+           •	Услуги (методы):
+           o	Регистрация Клиента (Абонента):
+                - регистрация Договора (присваивание номера, внесение в БД);
+                - изменение статуса Персоны с Клиента на Абонента (если не Абонент);
+                - внесение Абонента в БД;
+                - выдача Абоненту Терминала;
+                -
+           o	Предложение контракта
+           o	Внесение информации по контракту в БД
+           o	Выдача Абоненту Терминала (телефона) 
+           o	Расторжение контракта
+           o	Выдача части информации из Базы данных (так правильнее, чем доступ Абонента к БД)
+
+           •	Функционал:
+           o	Формирование базовой информации для Биллинговой системы:
+               	присваивание клиенту Номера (Клиент станет Абонентом)
+               	присваивание аппарату Абонентского номера
+               	присваивание Договору Номера
+           o	выдача каждому Абоненту терминала (телефона)           
+
+           •	Генерируемые события:
+           o	Изменение статуса Человека
+           o	Расторжение договора
+
+           •	Обрабатываемые события:
+           o	Заключение Клиентом или Абонентом Договора
+
+           */
     }
 }

@@ -1,13 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace task3.PBXPart
+﻿namespace task3.PBXPart
 {
-    class TerminalBase
+    class TerminalBase : HardwareBase
     {
+
+        /// <summary>
+        /// Terminal number
+        /// </summary>
+        internal int Number { get; set; } 
+
+
+        /// <summary>
+        /// CTOR
+        /// </summary>
+        /// <param name="number"></param>
+        private TerminalBase(int number)
+        {
+            this.Number = number;
+        }
+
+        /// <summary>
+        /// Create new Terminal
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns></returns>
+        internal static TerminalBase CreateInstance(int number) => number < 1
+            ? new TerminalBase(0)
+            : new TerminalBase(number);
+
+
+
+
+
+
 
         /*
         ТЕРМИНАЛ (ТЕЛЕФОН):

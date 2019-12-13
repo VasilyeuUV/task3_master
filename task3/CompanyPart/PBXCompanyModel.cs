@@ -1,14 +1,63 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using task3.CompanyPart.DB;
 using task3.PBXPart;
+using task3.PersonPart;
 
 namespace task3.CompanyPart
 {
-    public class CompanyPBXOperatorBase
+    public class PBXCompanyModel : IObservable<Person>
     {
 
-        private IEnumerable<PBXBase> _pBXList = null;
+        private PBXBase _pBX = null;                              // АТС
+        private PBXCompanyDataBase _companyDB = null;             // База данных компании
+        private CompanyServiceDepartment _service = null;
 
-        private CompanyServiceDepartment _seviceDepartment = null;
+
+        //internal PBXBase PBX { get => _pBX; }
+        //internal PBXCompanyDataBase CompanyDB { get => _companyDB; }
+
+        /// <summary>
+        /// Отдел обслуживания
+        /// </summary>
+        public CompanyServiceDepartment Service { get => _service; }
+
+
+
+
+        /// <summary>
+        /// CTOR
+        /// </summary>
+        /// <param name="tERMINAL_COUNT_DEFAULT"></param>
+        internal PBXCompanyModel()
+        {
+            this._pBX = PBXBase.CreateInstance();
+            this._companyDB = new PBXCompanyDataBase();
+            this._service = new CompanyServiceDepartment();
+        }
+
+        
+        /// <summary>
+        /// Company work
+        /// </summary>
+        internal void StartWork()
+        {
+            this._pBX.PowerOn();
+        }
+
+
+
+
+        public IDisposable Subscribe(IObserver<Person> observer)
+        {
+            throw new NotImplementedException();
+        }
+
+
+
+
+
+
+
 
 
 
