@@ -59,8 +59,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompanyPart\DB\BillingPart\CallsItem.cs" />
+    <Compile Include="CompanyPart\DB\ContractPart\ContractItem.cs" />
+    <Compile Include="CompanyPart\DB\ContractPart\SubscriberItem.cs" />
+    <Compile Include="CompanyPart\DB\ContractPart\TariffItem.cs" />
+    <Compile Include="CompanyPart\DB\ContractPart\TerminalItem.cs" />
     <Compile Include="CompanyPart\DB\PBXCompanyDataBase.cs" />
-    <Compile Include="CompanyPart\Documents\PBXContractModel.cs" />
+    <Compile Include="CompanyPart\Documents\PBXContractDocument.cs" />
     <Compile Include="CompanyPart\PBXCompanyModel.cs" />
     <Compile Include="CompanyPart\CompanyServiceDepartment.cs" />
     <Compile Include="CompanyPart\Documents\TariffModel.cs" />
@@ -72,7 +77,7 @@
     <Compile Include="CompanyPart\CompanyClientBase.cs" />
     <Compile Include="PBXPart\TerminalBase.cs" />
     <Compile Include="PersonPart\Person.cs" />
-    <Compile Include="CompanyPart\PBXSubscriberModel.cs" />
+    <Compile Include="CompanyPart\CompanySubscriberBase.cs" />
     <Compile Include="CompanyPart\Interfaces\IPBXStatusable.cs" />
     <Compile Include="PersonPart\Interfaces\IPersonalData.cs" />
     <Compile Include="Program.cs" />
@@ -83,8 +88,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CompanyPart\DB\BillingPart\" />
-    <Folder Include="CompanyPart\DB\ContractPart\" />
     <Folder Include="PBXPart\Interfaces\" />
   </ItemGroup>
   <ItemGroup>

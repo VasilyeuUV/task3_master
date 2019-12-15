@@ -1,4 +1,6 @@
-﻿namespace task3.PersonPart.Interfaces
+﻿using System;
+
+namespace task3.PersonPart.Interfaces
 {
 
     /// <summary>
@@ -6,10 +8,6 @@
     /// </summary>
     interface IPersonalData
     {
-        /// <summary>
-        /// Get some personal information
-        /// </summary>
-        /// <returns></returns>
-        string GetInfo();
+        Guid GiveInfo();
     }
 }

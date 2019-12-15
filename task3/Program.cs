@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using task3.CompanyPart;
+using task3.CompanyPart.Documents.ContractPart;
+using task3.PersonPart;
 using task3.Tools;
 
 namespace task3
@@ -8,9 +11,24 @@ namespace task3
     {
         static void Main(string[] args)
         {
-            PBXCompanyModel company = new PBXCompanyModel();
-            company.StartWork();
-            
+            PBXCompanyModel company = PBXCompanyModel.CreateInstance();
+            List<Person> persons = new List<Person>();
+
+            for (int i = 0; i < Const.SWITCHDEVICE_COUNT_DEFAULT; i++)
+            {
+                Person person = Person.CreateInstance();
+
+                person.OnEnteredToShop += company.SetClientStatus;
+                person.EnterToShop(company);
+
+                company.Service.AgreementConclusion(person);
+
+
+                if (person.PBXStatus as CompanySubscriberBase != null)
+                {
+                    persons.Add(person);
+                }                
+            }
 
 
 
@@ -18,5 +36,7 @@ namespace task3
 
             Console.ReadKey();
         }
+
+
     }
 }

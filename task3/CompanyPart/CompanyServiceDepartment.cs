@@ -1,14 +1,96 @@
-﻿using task3.PBXPart;
+﻿using System;
+using task3.CompanyPart.Documents;
+using task3.CompanyPart.Documents.ContractPart;
+using task3.CompanyPart.Interfaces;
 using task3.PersonPart;
 
 namespace task3.CompanyPart
 {
-    public class CompanyServiceDepartment
+    internal class CompanyServiceDepartment
     {
 
 
+        /// <summary>
+        /// 1-st stage: conclusion of an agreement
+        /// </summary>
+        internal void AgreementConclusion(Person person)
+        {
+            if (person == null) { return; }
+            if (person.PBXStatus == null || person.PBXStatus as IPBXStatusable == null) { return; }
+
+            OnProposedAgreement += person.BuyService;
+            person.PBXStatus.OnSignedAgreement += SubscriberRegistration;
+
+            ProposeAgreement();
+
+            if (person.PBXStatus as CompanySubscriberBase == null)
+            {
+                person.PBXStatus = new CompanySubscriberBase();
+            }
+        }
 
 
+
+        #region EVENT
+        //################################################################################################################
+
+        public event EventHandler OnProposedAgreement;
+        private void ProposeAgreement()
+        {
+            PBXContractDocument contract = GetPBXContract();
+            OnProposedAgreement?.Invoke(contract, new EventArgs());
+        }
+
+
+
+        #endregion //EVENTS
+
+
+        #region EVENT HANDLERS
+        //################################################################################################################
+
+
+        internal void SubscriberRegistration(object sender, EventArgs e)
+        {
+            var contract = sender as PBXContractDocument;
+            if (contract == null) { return; }
+
+
+
+
+
+        }
+
+
+        #endregion //EVENT HANDLERS
+
+
+
+
+
+        /// <summary>
+        /// Create new Contract
+        /// </summary>
+        /// <returns></returns>
+        private PBXContractDocument GetPBXContract(int id = 0)
+        {
+            PBXContractDocument contract = new PBXContractDocument();
+            contract.Id = id;
+            if (id == 0) 
+            {
+                contract.ContractDate = DateTime.Now;
+                contract.Tariff = TariffModel.NewTariff();
+               // contract.Terminal = TerminalBase.GetTerminal();
+            }
+            else 
+            {
+                //contract.ContractDate = GetContractDate(id);
+                //contract.Subscriber = GetContractSubscriber(id);
+                //contract.Tariff = GetContractTariff(id);
+                //contract.Terminal = GetContractTerminal(id);
+            }            
+            return contract;
+        }
 
 
 
@@ -33,6 +115,21 @@ namespace task3.CompanyPart
             //}
             //RemoveContract(contractNumber);            
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         /*
            Отдел обслуживания КОМПАНИИ – ОПЕРАТОРА АТС:

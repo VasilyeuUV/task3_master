@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using task3.CompanyPart.Documents.ContractPart;
 using task3.CompanyPart.Interfaces;
 using task3.PBXPart;
 
 namespace task3.CompanyPart
 {
-    internal class PBXSubscriberModel : IPBXStatusable
+    internal class CompanySubscriberBase : IPBXStatusable
     {
 
         public int Id { get; set; }
@@ -14,13 +15,19 @@ namespace task3.CompanyPart
         /// <summary>
         /// Link to Contracts
         /// </summary>
-        internal virtual IEnumerable<PBXContractModel> Contracts { get; set; }
+        internal virtual IEnumerable<PBXContractDocument> Contracts { get; set; }
 
 
         /// <summary>
         /// Link to Terminals
         /// </summary>
         internal virtual IEnumerable<TerminalBase> Terminals { get; set; }
+
+
+
+
+        // EVENTS
+        public event EventHandler OnSignedAgreement;
 
 
 

@@ -1,40 +1,43 @@
-﻿using task3.CompanyPart.Documents;
+﻿using System;
 using task3.PBXPart;
 
 namespace task3.CompanyPart.Documents.ContractPart
 {
-    internal class PBXContractModel
+    internal class PBXContractDocument
     {
 
-        public int Id { get; private set; } = 0;
+        internal int Id { get; set; } = 0;
 
         /// <summary>
         /// Contract date
         /// </summary>
-        public int ContractDate { get; private set; } = 0;
+        internal DateTime ContractDate { get; set; } 
 
         /// <summary>
         /// Contract termination date
         /// </summary>
-        public int ContractTerminationDate { get; set; } = 0;
+        internal DateTime ContractTerminationDate { get; set; }
 
 
         /// <summary>
         /// Reference to the Subscriber
         /// </summary>
-        public PBXSubscriberModel Subscriber { get; private set; } = null;
+        internal Guid PassportData { get; set; }
 
 
         /// <summary>
         /// Reference to the Tariff
         /// </summary>
-        public TariffModel Tariff { get; private set; }
+        internal TariffModel Tariff { get; set; }
 
 
         /// <summary>
         /// Reference to the Terminal
         /// </summary>
-        public TerminalBase Terminal { get; private set; }
+        internal TerminalBase Terminal { get; set; }
+
+
+
 
         /*
         ДОГОВОР
