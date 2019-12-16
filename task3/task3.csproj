@@ -72,6 +72,7 @@
     <Compile Include="CompanyPart\Documents\TariffModel.cs" />
     <Compile Include="PBXPart\ControlDeviceBase.cs" />
     <Compile Include="PBXPart\HardwareBase.cs" />
+    <Compile Include="PBXPart\Interfaces\ITerminal.cs" />
     <Compile Include="PBXPart\PBXBase.cs" />
     <Compile Include="PBXPart\SwitchDeviceBase.cs" />
     <Compile Include="PBXPart\SwitchSystemBase.cs" />
@@ -88,9 +89,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="PBXPart\Interfaces\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">
       <Visible>False</Visible>

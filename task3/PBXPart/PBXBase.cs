@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using task3.Tools;
 
 namespace task3.PBXPart
@@ -21,9 +22,9 @@ namespace task3.PBXPart
         /// </summary>
         /// <param name="terminal_count"></param>
         private PBXBase()
-        {             
-            this._controlDevice = new ControlDeviceBase(); 
+        {
             this._switchSystem = SwitchSystemBase.CreateInstance(Const.SWITCHDEVICE_COUNT_DEFAULT);
+            this._controlDevice = new ControlDeviceBase(ref this._switchSystem);
 
             this.OnPowerChange += PBXBase_OnPowerChange;
         }

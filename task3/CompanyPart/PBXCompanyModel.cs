@@ -36,6 +36,7 @@ namespace task3.CompanyPart
         internal static PBXCompanyModel CreateInstance()
         {
             PBXCompanyModel company = new PBXCompanyModel(); 
+
             company.Service.RegisterHandler(
                 new CompanyServiceDepartment.SetDataHandler(company._companyDB.SetData));
             company.Service.RegisterHandler(

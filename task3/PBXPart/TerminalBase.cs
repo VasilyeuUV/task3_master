@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Threading;
 using task3.CompanyPart.Interfaces;
+using task3.PBXPart.Interfaces;
+using task3.Tools;
+using static task3.PBXPart.Interfaces.ITerminal;
 
 namespace task3.PBXPart
 {
@@ -13,7 +17,21 @@ namespace task3.PBXPart
         /// </summary>
         internal int Number { get; set; }
 
-        
+        public bool IsReady { get; internal set; }
+
+        //public event EventHandler OnCalling;
+        //public event EventHandler OnAnswering;
+        //public event EventHandler OnBreaking;
+
+
+
+        internal delegate bool CallHandler(int number, bool end = false);
+        internal CallHandler CallDlgt;
+
+        internal void RegisterHandler(CallHandler dlgt)
+        {
+            CallDlgt = dlgt;
+        }
 
 
         /// <summary>
@@ -24,6 +42,8 @@ namespace task3.PBXPart
         {
             this.Id = number;
             this.Number = number;
+
+            this.OnPowerChange += TerminalBase_OnPowerChange;
         }
 
         /// <summary>
@@ -40,7 +60,57 @@ namespace task3.PBXPart
         }
 
 
-        //internal static event EventHandler OnCreated;
+
+        private void TerminalBase_OnPowerChange()
+        {
+            if (this.IsPowered)
+            {
+                IsReady = true;
+            }
+            else
+            {
+                IsReady = false;
+            }
+        }
+
+
+        internal void Call(int number)
+        {
+            Console.WriteLine("-- CALLING --");
+            Console.WriteLine($"-- terminal {this.Number} IsPowered: {this.IsPowered}; IsReady: {this.IsReady};");
+            Console.WriteLine($"-- terminal {this.Number} call terminal {number}");
+            this.IsReady = !CallDlgt(number);
+            Console.WriteLine($"-- terminal {this.Number} IsPowered: {this.IsPowered}; IsReady: {this.IsReady};");
+            if (!this.IsReady)
+            {
+                Thread.Sleep(Const.RND.Next(0, 1000));
+                Console.WriteLine("-- BREAKING --");
+                Console.WriteLine($"-- terminal {this.Number} IsPowered: {this.IsPowered}; IsReady: {this.IsReady};");
+                Console.WriteLine($"-- terminal {this.Number} break terminal {number}");
+                this.IsReady = !CallDlgt(number, true);           // as call break
+            }
+            Console.WriteLine($"-- terminal {this.Number} IsPowered: {this.IsPowered}; IsReady: {this.IsReady};");
+            Console.WriteLine($"-- terminal {this.Number} end call");
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

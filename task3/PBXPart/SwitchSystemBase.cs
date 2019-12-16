@@ -46,7 +46,6 @@ namespace task3.PBXPart
             }
         }
 
-
         /// <summary>
         /// Create new SwitchSystem
         /// </summary>
@@ -63,6 +62,9 @@ namespace task3.PBXPart
             swSys.SwitchDevices = lst;
             return swSys;
         }
+               
+
+
 
 
 

@@ -114,6 +114,7 @@ namespace task3.PersonPart
 
         internal void TakeTerminal(TerminalBase terminal)
         {
+            terminal.PowerOn();
             Terminals.Add(terminal);
             _selectedTerminals = terminal;
         }
