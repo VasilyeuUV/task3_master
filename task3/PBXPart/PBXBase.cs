@@ -15,6 +15,8 @@ namespace task3.PBXPart
 
         private SwitchSystemBase _switchSystem = null;
 
+        internal ControlDeviceBase ControlDevice { get => _controlDevice;}
+
 
 
         /// <summary>

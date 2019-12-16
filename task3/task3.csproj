@@ -70,6 +70,7 @@
     <Compile Include="CompanyPart\PBXCompanyModel.cs" />
     <Compile Include="CompanyPart\CompanyServiceDepartment.cs" />
     <Compile Include="CompanyPart\Documents\TariffModel.cs" />
+    <Compile Include="PBXPart\CallInfo.cs" />
     <Compile Include="PBXPart\ControlDeviceBase.cs" />
     <Compile Include="PBXPart\HardwareBase.cs" />
     <Compile Include="PBXPart\Interfaces\ITerminal.cs" />

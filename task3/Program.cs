@@ -35,7 +35,7 @@ namespace task3
                     {
                         persons[i] = person;
                     }
-                }             
+                }
             }
 
 
@@ -44,9 +44,17 @@ namespace task3
             Console.WriteLine("Press any key to continue.");
             Console.ReadKey();
 
+            person = CallingProcess(persons);
+
+            Console.ReadKey();
+        }
+
+        private static Person CallingProcess(Person[] persons)
+        {
+            Person person;
             Console.Clear();
 
-            int second = 0;        
+            int second = 0;
             ConsoleKeyInfo cki = new ConsoleKeyInfo();
             do
             {
@@ -59,7 +67,8 @@ namespace task3
                 if (operation < 1)
                 {
                     Console.WriteLine($"- operation: Get Call Report.");
-                    //person.GetCallReport();
+                    var subscriber = person.PBXStatus as CompanySubscriberBase;
+                    //subscriber.RequestCallReport();
                 }
                 else
                 {
@@ -71,32 +80,21 @@ namespace task3
                         Console.WriteLine($"-- terminal ready");
                         int number = Const.RND.Next(0, Const.SWITCHDEVICE_COUNT_DEFAULT);
                         Console.WriteLine($"-- call number {number}");
-                        if (number != terminal.Number)
-                        {
-                            Console.WriteLine($"--- start call");
-                            terminal.Call(number);
-                        }
-                        else
-                        {
-                            Console.WriteLine($"--- wrong number");
-                        }
+
+                        Console.WriteLine($"--- start call");
+                        terminal.Call(number);
+
                     }
                 }
                 Console.WriteLine($"");
                 Console.ReadKey();
 
-                //if (Console.KeyAvailable == true)
-                //{
-                //    cki = Console.ReadKey(true);
-                //}
+                if (Console.KeyAvailable == true)
+                {
+                    cki = Console.ReadKey(true);
+                }
             } while (cki.Key != ConsoleKey.Escape || second < Int32.MaxValue);
-
-
-
-
-            Console.ReadKey();
+            return person;
         }
-
-
     }
 }

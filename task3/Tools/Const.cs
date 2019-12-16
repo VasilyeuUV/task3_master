@@ -1,4 +1,5 @@
 ﻿using System;
+using task3.CompanyPart.DB.ContractPart;
 
 namespace task3.Tools
 {
@@ -6,8 +7,10 @@ namespace task3.Tools
     {
 
         internal const int SWITCHDEVICE_COUNT_DEFAULT = 9;
+        internal const int DEFAULT_TARIF_COST = 1;
 
         internal static readonly Random RND = new Random();
 
+        
     }
 }

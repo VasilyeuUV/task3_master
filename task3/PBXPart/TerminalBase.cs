@@ -76,6 +76,13 @@ namespace task3.PBXPart
 
         internal void Call(int number)
         {
+
+            if (number == this.Number)
+            {
+                Console.WriteLine($"--- wrong number");
+                return;
+            }
+
             Console.WriteLine("-- CALLING --");
             Console.WriteLine($"-- terminal {this.Number} IsPowered: {this.IsPowered}; IsReady: {this.IsReady};");
             Console.WriteLine($"-- terminal {this.Number} call terminal {number}");

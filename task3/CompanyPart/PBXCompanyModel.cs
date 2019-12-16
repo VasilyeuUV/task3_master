@@ -42,6 +42,9 @@ namespace task3.CompanyPart
             company.Service.RegisterHandler(
                 new CompanyServiceDepartment.GetDataHandler(company._companyDB.GetData));
 
+            company.PBX.ControlDevice.OnCallFinished += company._companyDB.SetData;
+
+
             return company;
         }
 

@@ -7,6 +7,7 @@ using task3.CompanyPart.Documents;
 using task3.CompanyPart.Documents.ContractPart;
 using task3.CompanyPart.Interfaces;
 using task3.PBXPart;
+using task3.Tools;
 
 namespace task3.CompanyPart.DB
 {
@@ -62,6 +63,11 @@ namespace task3.CompanyPart.DB
         /// <param name="data"></param>
         internal void SetData(IDataable data)
         {
+
+            var callInfo = data as CallInfo;
+            if (callInfo != null) { SetCallInfo(callInfo); return; }
+
+
             var tariff = data as TariffModel;
             if (tariff != null) { SetTariff(tariff); return; }
 
@@ -72,6 +78,43 @@ namespace task3.CompanyPart.DB
             if (contract != null) { SaveContract(contract);  return; }
 
         }
+
+        private void SetCallInfo(CallInfo callInfo)
+        {
+            CallsItem callItem = new CallsItem();
+
+            var fromContract = GetContract(callInfo.OutNumber);
+            var toContract = GetContract(callInfo.IncNumber);
+            
+            callItem.From = fromContract.Id;
+            callItem.To = toContract.Id;
+            callItem.DTG = callInfo.BeginCall;
+            TimeSpan span = callInfo.EndCall - callItem.DTG;
+            callItem.Duration = span.Milliseconds;
+            callItem.Cost = callItem.Duration * GetCost(fromContract.TariffId);
+
+            callItem.Id = CallsTable.Count + 1;
+            CallsTable.Add(callItem);
+        }
+
+        private int GetCost(int tariffId)
+        {
+            var result = TariffTable.FirstOrDefault(x => x.Id == tariffId);
+            return result == null ? Const.DEFAULT_TARIF_COST : result.Cost;
+        }
+
+        /// <summary>
+        /// Get Contract by terminal number
+        /// </summary>
+        /// <param name="outNumber">terminal number</param>
+        /// <returns></returns>
+        private ContractItem GetContract(int number)
+        {
+            return ContractTable.FirstOrDefault(x => x.TerminalId == number);
+        }
+
+
+
 
 
 
@@ -113,7 +156,6 @@ namespace task3.CompanyPart.DB
             SubscriberItem subscriber = GetSubscriber(contract);
             subscriber.Contracts.Add(contract.Id);            
         }
-
 
 
                      
