@@ -9,10 +9,10 @@ namespace task3.CompanyPart.DB.ContractPart
         /// </summary>
         internal int Id { get; private set; } = 0;
 
-        /// <summary>
-        /// Terminal number
-        /// </summary>
-        internal int Number { get; private set; } = 0;
+        ///// <summary>
+        ///// Terminal number
+        ///// </summary>
+        //internal int Number { get; private set; } = 0;
 
 
         /// <summary>
@@ -20,7 +20,8 @@ namespace task3.CompanyPart.DB.ContractPart
         /// </summary>
         internal TerminalItem(TerminalBase terminal)
         {
-            this.Number = terminal.Number;
+            this.Id = terminal.Number;
+            //this.Number = terminal.Number;
         }
 
     }

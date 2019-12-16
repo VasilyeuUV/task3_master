@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace task3.PBXPart
 {
@@ -20,9 +21,8 @@ namespace task3.PBXPart
         /// </summary>
         /// <param name="switchDeviceCount"></param>
         private SwitchSystemBase()
-        {
+        {            
         }
-
 
 
         /// <summary>

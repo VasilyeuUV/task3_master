@@ -1,12 +1,15 @@
-﻿namespace task3.CompanyPart.Documents
+﻿using task3.CompanyPart.DB.ContractPart;
+using task3.CompanyPart.Interfaces;
+
+namespace task3.CompanyPart.Documents
 {
-    public class TariffModel
+    public class TariffModel : IDataable
     {
 
         /// <summary>
         /// Tariff id for DB
         /// </summary>
-        internal int Id { get; private set; } = 1;
+        public int Id { get; private set; } = 1;
 
         /// <summary>
         /// Tarif name
@@ -37,6 +40,21 @@
             TariffModel tariff = new TariffModel();
             if (name != "") { tariff.Name = name; }
             if (cost != 0) { tariff.Cost = cost; }
+            return tariff;
+        }
+
+        /// <summary>
+        /// Convert TariffItem To TariffModel
+        /// </summary>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        internal static TariffModel ConvertToTariff(TariffItem t)
+        {
+            if (t == null) { return null; }
+            TariffModel tariff = new TariffModel();
+            tariff.Id = t.Id;
+            tariff.Name = t.Name;
+            tariff.Cost = t.Cost;
             return tariff;
         }
 

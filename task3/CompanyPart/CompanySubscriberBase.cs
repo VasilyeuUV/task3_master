@@ -29,6 +29,11 @@ namespace task3.CompanyPart
         // EVENTS
         public event EventHandler OnSignedAgreement;
 
+        public void SignAgreement(PBXContractDocument contract)
+        {
+            OnSignedAgreement?.Invoke(contract, EventArgs.Empty);
+        }
+
 
 
 

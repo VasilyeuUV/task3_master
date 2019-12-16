@@ -43,13 +43,13 @@ namespace task3.CompanyPart.DB.ContractPart
         /// <param name="contract"></param>
         internal ContractItem(PBXContractDocument contract)
         {
+            this.Id = contract.Id;
             this.ContractNumber = contract.Id;
             this.CreateData = contract.ContractDate;
             this.TariffId = contract.Tariff.Id;
-            this.TerminalId = GetTerminalId(contract.Terminal.Number);
+            this.TerminalId = contract.Terminal.Number;
 
         }
-
 
     }
 }

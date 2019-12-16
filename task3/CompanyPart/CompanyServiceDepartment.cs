@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using task3.CompanyPart.Documents;
 using task3.CompanyPart.Documents.ContractPart;
 using task3.CompanyPart.Interfaces;
+using task3.PBXPart;
 using task3.PersonPart;
 
 namespace task3.CompanyPart
@@ -9,25 +12,81 @@ namespace task3.CompanyPart
     internal class CompanyServiceDepartment
     {
 
+        private List<TerminalBase> Terminals { get; set; }
+        private TerminalBase selectedTerminal = null;
+
+
+        /// <summary>
+        /// CTOR
+        /// </summary>
+        internal CompanyServiceDepartment()
+        {
+            this.Terminals = new List<TerminalBase>();
+        }
+
+
+        internal delegate void SetDataHandler(IDataable data);
+        internal delegate IDataable GetDataHandler(int id);
+
+        internal SetDataHandler SetDataDlgt;
+        internal GetDataHandler GetDataDlgt;
+
+        public void RegisterHandler(SetDataHandler dlgt)
+        {
+            SetDataDlgt = dlgt;
+        }
+        public void RegisterHandler(GetDataHandler dlgt)
+        {
+            GetDataDlgt = dlgt;
+        }
+
+
+
+        /// <summary>
+        /// First operations on Create Company
+        /// </summary>
+        internal void StartWork(PBXCompanyModel company)
+        {
+            SetDataDlgt(TariffModel.NewTariff());
+            this.Terminals = (company.PBX.GetTerminals()).ToList();
+            foreach (var item in this.Terminals)
+            {
+                SetDataDlgt(item);
+            }
+            company.PBX.PowerOn();
+        }
+                          
 
         /// <summary>
         /// 1-st stage: conclusion of an agreement
         /// </summary>
-        internal void AgreementConclusion(Person person)
+        internal bool AgreementConclusion(Person person)
         {
-            if (person == null) { return; }
-            if (person.PBXStatus == null || person.PBXStatus as IPBXStatusable == null) { return; }
+            if (person == null) { return false; }
+            if (person.PBXStatus == null || person.PBXStatus as IPBXStatusable == null) { return false; }
+
+            if (this.Terminals.Count < 1) { return false; }
 
             OnProposedAgreement += person.BuyService;
             person.PBXStatus.OnSignedAgreement += SubscriberRegistration;
 
-            ProposeAgreement();
+            ProposeAgreement();            
 
             if (person.PBXStatus as CompanySubscriberBase == null)
             {
                 person.PBXStatus = new CompanySubscriberBase();
             }
+
+            person.TakeTerminal(selectedTerminal);
+            this.Terminals.Remove(selectedTerminal);
+            selectedTerminal = null;
+
+
+            return true;
         }
+
+
+
 
 
 
@@ -38,7 +97,7 @@ namespace task3.CompanyPart
         private void ProposeAgreement()
         {
             PBXContractDocument contract = GetPBXContract();
-            OnProposedAgreement?.Invoke(contract, new EventArgs());
+            OnProposedAgreement?.Invoke(contract, EventArgs.Empty);
         }
 
 
@@ -55,12 +114,11 @@ namespace task3.CompanyPart
             var contract = sender as PBXContractDocument;
             if (contract == null) { return; }
 
-
-
-
-
+            if (contract.PassportData != null)
+            {
+                SetDataDlgt(contract);
+            }                     
         }
-
 
         #endregion //EVENT HANDLERS
 
@@ -71,16 +129,19 @@ namespace task3.CompanyPart
         /// <summary>
         /// Create new Contract
         /// </summary>
+        /// <param name="number">Contract number</param>
         /// <returns></returns>
-        private PBXContractDocument GetPBXContract(int id = 0)
+        private PBXContractDocument GetPBXContract(int number = 0)
         {
             PBXContractDocument contract = new PBXContractDocument();
-            contract.Id = id;
-            if (id == 0) 
+            contract.Id = number;
+            if (number == 0) 
             {
                 contract.ContractDate = DateTime.Now;
                 contract.Tariff = TariffModel.NewTariff();
-               // contract.Terminal = TerminalBase.GetTerminal();
+                
+                selectedTerminal = Terminals.First();
+                contract.Terminal = selectedTerminal;
             }
             else 
             {
@@ -91,6 +152,17 @@ namespace task3.CompanyPart
             }            
             return contract;
         }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -15,21 +15,9 @@ namespace task3.CompanyPart
         /// Отдел обслуживания
         /// </summary>
         internal CompanyServiceDepartment Service { get; private set; }
+        internal PBXBase PBX { get => _pBX; }
 
 
-        // Event Handlers
-        internal void SetClientStatus(object sender, EventArgs e)
-        {
-            var person = sender as Person;
-            if (person == null) { return; }            
-
-            if (person.PBXStatus == null) 
-            { 
-                person.PBXStatus = new CompanyClientBase();
-            }
-        }
-        
-               
         /// <summary>
         /// CTOR
         /// </summary>
@@ -41,17 +29,44 @@ namespace task3.CompanyPart
             this.Service = new CompanyServiceDepartment();
         }
 
-
+        /// <summary>
+        /// Create new PBXCompanyModel object
+        /// </summary>
+        /// <returns></returns>
         internal static PBXCompanyModel CreateInstance()
         {
-            PBXCompanyModel company = new PBXCompanyModel();
-            company._pBX.PowerOn();
+            PBXCompanyModel company = new PBXCompanyModel(); 
+            company.Service.RegisterHandler(
+                new CompanyServiceDepartment.SetDataHandler(company._companyDB.SetData));
+            company.Service.RegisterHandler(
+                new CompanyServiceDepartment.GetDataHandler(company._companyDB.GetData));
+
+            //company.Service.RegisterHandler(
+            //    new CompanyServiceDepartment.SetDataHandler(company._companyDB.SaveContract));
+            //company.Service.RegisterHandler(
+            //    new CompanyServiceDepartment.SetDataHandler(company._companyDB.SetTerminal));
+
+            //TerminalBase.OnCreated += company.Service.SetTerminal;
+
+
+
             return company;
         }
 
 
 
 
+        // Event Handlers
+        internal void SetClientStatus(object sender, EventArgs e)
+        {
+            var person = sender as Person;
+            if (person == null) { return; }
+
+            if (person.PBXStatus == null)
+            {
+                person.PBXStatus = new CompanyClientBase();
+            }
+        }
 
 
 

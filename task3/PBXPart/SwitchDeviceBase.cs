@@ -1,11 +1,16 @@
-﻿namespace task3.PBXPart
+﻿using System;
+
+namespace task3.PBXPart
 {
     internal class SwitchDeviceBase : HardwareBase
     {
+        private TerminalBase _terminal = null;
 
-        internal int PortNumber { get; set; } = 0;
+        internal int PortNumber { get; private set; } = 0;
         public bool IsConnected { get; set; } = false;
+        public TerminalBase Terminal { get => _terminal; }
 
+        
 
 
         /// <summary>
@@ -14,6 +19,7 @@
         private SwitchDeviceBase(int number)
         {
             this.PortNumber = number;
+            this._terminal = TerminalBase.CreateInstance(number);
         }
 
 
@@ -23,10 +29,10 @@
         /// <param name="number"></param>
         /// <returns></returns>
         internal static SwitchDeviceBase CreateInstance(int number)
-        {
-            return number < 1
-                          ? new SwitchDeviceBase(0)
-                          : new SwitchDeviceBase(number);
+        {            
+            if (number < 1) { number = 0; }
+            SwitchDeviceBase switchDevice = new SwitchDeviceBase(number);
+            return switchDevice;
         }
 
 

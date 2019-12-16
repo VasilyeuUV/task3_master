@@ -15,30 +15,40 @@ namespace task3.PBXPart
         private SwitchSystemBase _switchSystem = null;
 
 
-        private IEnumerable<TerminalBase> _terminalList = null;
-
-
-      
-
-
-
 
         /// <summary>
         /// CTOR
         /// </summary>
         /// <param name="terminal_count"></param>
         private PBXBase()
-        {
-            this._controlDevice = new ControlDeviceBase();                      
-            this._switchSystem = SwitchSystemBase.CreateInstance(Const.SWITCHDEVICE_COUNT_DEFAULT);
-            this._terminalList = PBXBase.SetTerminals(Const.SWITCHDEVICE_COUNT_DEFAULT);               
+        {             
+            this._controlDevice = new ControlDeviceBase(); 
+            this._switchSystem = SwitchSystemBase.CreateInstance(Const.SWITCHDEVICE_COUNT_DEFAULT);           
         }
 
         /// <summary>
         /// Create new PBX
         /// </summary>
         /// <returns></returns>
-        internal static PBXBase CreateInstance() { return new PBXBase(); }
+        internal static PBXBase CreateInstance() 
+        { 
+            return new PBXBase(); 
+        }
+
+        /// <summary>
+        /// Get terminals from SwitchSystem
+        /// </summary>
+        /// <returns></returns>
+        internal IEnumerable<TerminalBase> GetTerminals()
+        {
+            List<TerminalBase> lst = new List<TerminalBase>();
+            foreach (var item in this._switchSystem.SwitchDevices)
+            {
+                lst.Add(item.Terminal);
+            }
+            return lst;
+        }
+
 
 
         /// <summary>
@@ -46,15 +56,15 @@ namespace task3.PBXPart
         /// </summary>
         /// <param name="terminal_count">number of added terminals</param>
         /// <returns>terminals list</returns>
-        private static IEnumerable<TerminalBase> SetTerminals(int terminal_count = 1)
-        {
-            List<TerminalBase> lst = new List<TerminalBase>();
-            for (int i = 0; i < terminal_count; i++)
-            {
-                lst.Add(TerminalBase.CreateInstance(i + 1));
-            }
-            return lst;
-        }
+        //private static IEnumerable<TerminalBase> SetTerminals(int terminal_count = 1)
+        //{
+        //    List<TerminalBase> lst = new List<TerminalBase>();
+        //    for (int i = 0; i < terminal_count; i++)
+        //    {
+        //        lst.Add(TerminalBase.CreateInstance(i + 1));
+        //    }
+        //    return lst;
+        //}
 
 
 

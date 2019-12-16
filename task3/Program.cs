@@ -12,6 +12,8 @@ namespace task3
         static void Main(string[] args)
         {
             PBXCompanyModel company = PBXCompanyModel.CreateInstance();
+            company.Service.StartWork(company);
+
             List<Person> persons = new List<Person>();
 
             for (int i = 0; i < Const.SWITCHDEVICE_COUNT_DEFAULT; i++)
@@ -21,13 +23,14 @@ namespace task3
                 person.OnEnteredToShop += company.SetClientStatus;
                 person.EnterToShop(company);
 
-                company.Service.AgreementConclusion(person);
 
-
-                if (person.PBXStatus as CompanySubscriberBase != null)
+                if (company.Service.AgreementConclusion(person))
                 {
-                    persons.Add(person);
-                }                
+                    if (person.PBXStatus as CompanySubscriberBase != null)
+                    {
+                        persons.Add(person);
+                    }
+                }             
             }
 
 

@@ -1,12 +1,13 @@
 ﻿using System;
+using task3.CompanyPart.Interfaces;
 using task3.PBXPart;
 
 namespace task3.CompanyPart.Documents.ContractPart
 {
-    internal class PBXContractDocument
+    internal class PBXContractDocument : IDataable
     {
 
-        internal int Id { get; set; } = 0;
+        public int Id { get; set; } = 0;
 
         /// <summary>
         /// Contract date

@@ -1,12 +1,19 @@
-﻿namespace task3.PBXPart
+﻿using System;
+using task3.CompanyPart.Interfaces;
+
+namespace task3.PBXPart
 {
-    class TerminalBase : HardwareBase
+    public class TerminalBase : HardwareBase, IDataable
     {
+
+        public int Id { get; private set; }
 
         /// <summary>
         /// Terminal number
         /// </summary>
-        internal int Number { get; set; } 
+        internal int Number { get; set; }
+
+        
 
 
         /// <summary>
@@ -15,6 +22,7 @@
         /// <param name="number"></param>
         private TerminalBase(int number)
         {
+            this.Id = number;
             this.Number = number;
         }
 
@@ -23,11 +31,16 @@
         /// </summary>
         /// <param name="number"></param>
         /// <returns></returns>
-        internal static TerminalBase CreateInstance(int number) => number < 1
-            ? new TerminalBase(0)
-            : new TerminalBase(number);
+        internal static TerminalBase CreateInstance(int number)
+        {
+            if (number < 1) { number = 0; }
+            TerminalBase terminal = new TerminalBase(number);
+            //TerminalBase.OnCreated?.Invoke(terminal, EventArgs.Empty);
+            return terminal;
+        }
 
 
+        //internal static event EventHandler OnCreated;
 
 
 

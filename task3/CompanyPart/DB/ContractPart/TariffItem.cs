@@ -1,4 +1,4 @@
-﻿using task3.CompanyPart.Documents.ContractPart;
+﻿using task3.CompanyPart.Documents;
 
 namespace task3.CompanyPart.DB.ContractPart
 {
@@ -26,10 +26,11 @@ namespace task3.CompanyPart.DB.ContractPart
         /// CTOR
         /// </summary>
         /// <param name="contract"></param>
-        internal TariffItem(PBXContractDocument contract)
+        internal TariffItem(int id, TariffModel tariff)
         {
-            this.Name = contract.Tariff.Name;
-            this.Cost = contract.Tariff.Cost;
+            this.Id = id;
+            this.Name = tariff.Name;
+            this.Cost = tariff.Cost;
         }
 
 

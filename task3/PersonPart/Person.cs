@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using task3.CompanyPart.Documents.ContractPart;
 using task3.CompanyPart.Interfaces;
+using task3.PBXPart;
 using task3.PersonPart.Interfaces;
 
 namespace task3.PersonPart
@@ -33,6 +34,21 @@ namespace task3.PersonPart
         /// Pasport Data
         /// </summary>
         internal PassportData PersonalInfo { get; private set; }
+        
+
+        private List<TerminalBase> _terminals = null;
+        public List<TerminalBase> Terminals
+        {
+            get
+            {
+                if (_terminals == null)
+                {
+                    _terminals = new List<TerminalBase>();
+                }
+                return _terminals;
+            }
+        }
+        private TerminalBase _selectedTerminals = null;
 
 
         /// <summary>
@@ -67,12 +83,6 @@ namespace task3.PersonPart
         }
 
 
-        internal event EventHandler OnSignedAgreement;
-        internal void SignAgreement(PBXContractDocument contract)
-        {
-            OnSignedAgreement?.Invoke(contract, EventArgs.Empty);
-        }
-
         #endregion //EVENTS
 
 
@@ -81,6 +91,7 @@ namespace task3.PersonPart
 
         internal void BuyService(object sender, EventArgs e)
         {
+            
             var contract = sender as PBXContractDocument;
             if (contract == null) { return; }
 
@@ -88,17 +99,24 @@ namespace task3.PersonPart
 
             if (contract.PassportData == null)
             {
-                SignAgreement(null);
+               this.PBXStatus.SignAgreement(null);
             }
             else
             {
-                SignAgreement(contract);
+                this.PBXStatus.SignAgreement(contract);
             }
         }
+
+
 
         #endregion EVENT HANDLERS
 
 
+        internal void TakeTerminal(TerminalBase terminal)
+        {
+            Terminals.Add(terminal);
+            _selectedTerminals = terminal;
+        }
 
 
 

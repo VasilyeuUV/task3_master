@@ -28,7 +28,7 @@ namespace task3.CompanyPart.DB.BillingPart
         /// <summary>
         /// Call DateTime
         /// </summary>
-        internal DateTime DTG { get; private set; };
+        internal DateTime DTG { get; private set; }
 
 
         /// <summary>
