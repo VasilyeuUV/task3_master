@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using task3.CompanyPart.Documents;
 using task3.CompanyPart.Documents.ContractPart;
 using task3.CompanyPart.Interfaces;
@@ -17,7 +18,7 @@ namespace task3.CompanyPart
         /// <summary>
         /// Link to Contracts
         /// </summary>
-        internal virtual IEnumerable<PBXContractDocument> Contracts { get; set; }
+        internal virtual ICollection<PBXContractDocument> Contracts { get; private set; }
 
 
         /// <summary>
@@ -25,9 +26,13 @@ namespace task3.CompanyPart
         /// </summary>
         internal virtual IEnumerable<TerminalBase> Terminals { get; set; }
 
+        
 
 
-        List<CallReportItem> callReport = null;
+        public CompanySubscriberBase(PBXContractDocument contract)
+        {
+            this.Contracts = new List<PBXContractDocument> { contract };
+        }
 
 
 
@@ -43,9 +48,36 @@ namespace task3.CompanyPart
 
         public delegate IEnumerable<IDataable> RequestCallReportHandler(PBXContractDocument contract, Const.GetInfo info);
         public event RequestCallReportHandler OnRequestCallReport;
-        public IEnumerable<IDataable> RequestCallReport(PBXContractDocument contract, Const.GetInfo info)
+        public IEnumerable<CallReportItem> RequestCallReport(PBXContractDocument contract, Const.GetInfo info)
         {
-            return OnRequestCallReport?.Invoke(contract, Const.GetInfo.CallReport);
+            var result = OnRequestCallReport?.Invoke(contract, Const.GetInfo.CallReport);
+            return ConvertToCallReport(result);
+        }
+
+
+        private IEnumerable<CallReportItem> ConvertToCallReport(IEnumerable<IDataable> lst)
+        {
+            List<CallReportItem> result = new List<CallReportItem>();
+            foreach (var item in lst)
+            {
+                result.Add(item as CallReportItem);
+            }
+            return result;
+        }
+
+        internal IEnumerable<CallReportItem> SortReportByData(IEnumerable<CallReportItem> lst)
+        {
+            return lst.OrderByDescending(x => x.CallDTG);
+        }
+
+        internal IEnumerable<CallReportItem> SortReportByNumber(IEnumerable<CallReportItem> lst)
+        {
+            return lst.OrderBy(x => x.OutNumber);
+        }
+
+        internal IEnumerable<CallReportItem> SortReportByCost(IEnumerable<CallReportItem> lst)
+        {
+            return lst.OrderByDescending(x => x.Cost);
         }
     }
 }

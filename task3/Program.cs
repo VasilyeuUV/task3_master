@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using task3.CompanyPart;
+using task3.CompanyPart.Documents;
 using task3.CompanyPart.Documents.ContractPart;
 using task3.PersonPart;
 using task3.Tools;
@@ -11,7 +13,7 @@ namespace task3
 {
     class Program
     {
-        const int CALLCOUNT = 20;
+        const int CALLCOUNT = 30;
 
 
         static void Main(string[] args)
@@ -53,12 +55,8 @@ namespace task3
             //ConsoleKeyInfo cki = new ConsoleKeyInfo();
             do
             {
-                if (++second < 5)
-                {
-                    Thread.Sleep(2000);
-                }
+                Thread.Sleep(1000);
 
-                
                 Console.Clear();
 
                 person = persons[Const.RND.Next(0, Const.SWITCHDEVICE_COUNT_DEFAULT)];
@@ -92,7 +90,7 @@ namespace task3
                 //{
                 //    cki = Console.ReadKey(true);
                 //}
-            } while (/*cki.Key != ConsoleKey.Escape ||*/ second < CALLCOUNT);
+            } while (/*cki.Key != ConsoleKey.Escape ||*/ ++second < CALLCOUNT);
 
 
             Console.Clear();
@@ -100,21 +98,56 @@ namespace task3
             var subscriber = person.PBXStatus as CompanySubscriberBase;
             if (subscriber != null)
             {
-                var terminalNumber = subscriber.Contracts.First();
-                Console.WriteLine($"Information about calls from number {terminalNumber}");
-                subscriber.RequestCallReport(terminalNumber, Const.GetInfo.CallReport);
+                var contractNumber = subscriber.Contracts.First();
+                Console.WriteLine($"Information about calls under the contract of {contractNumber.ContractDate.Date} No. {contractNumber.Id} ");
+                Console.WriteLine();
 
+                var result = subscriber.RequestCallReport(contractNumber, Const.GetInfo.CallReport);
+                Console.WriteLine($"TOTAL CALLS - {result.Count()}");
+                Console.WriteLine();
+
+                Console.WriteLine($"Sorted by DATA:");
+                ViewReport(subscriber.SortReportByData(result), Const.ViewInfo.ByDate);
+
+                Console.WriteLine($"Sorted by NUMBER:");
+                ViewReport(subscriber.SortReportByNumber(result), Const.ViewInfo.ByNumber);
+
+                Console.WriteLine($"Sorted by COST:");
+                ViewReport(subscriber.SortReportByCost(result), Const.ViewInfo.ByCost);
             }
-
-            
-
-
-
 
             Console.WriteLine($"Press any key to Exit");
             Console.ReadKey();
         }
-        
 
+        private static void ViewReport(IEnumerable<CallReportItem> lst, Const.ViewInfo param)
+        {
+            StringBuilder str = new StringBuilder();
+
+
+
+            foreach (var item in lst)
+            {
+                switch (param)
+                {
+                    case Const.ViewInfo.ByDate:
+                        str.Append(string.Format("Date: {0}; Number: {1}; Duration: {2}; Cost: {3};\n"
+                            , item.CallDTG, item.OutNumber, item.CallDuration, item.Cost));
+                        break;
+                    case Const.ViewInfo.ByNumber:
+                        str.Append(string.Format("Number: {0}; Date: {1}; Duration: {2}; Cost: {3};\n"
+                            , item.OutNumber, item.CallDTG, item.CallDuration, item.Cost));
+                        break;
+                    case Const.ViewInfo.ByCost:
+                        str.Append(string.Format("Cost: {0}; Number: {1}; Date: {2}; Duration: {3};\n"
+                            , item.Cost, item.OutNumber, item.CallDTG, item.CallDuration));
+                        break;
+                    default:
+                        break;
+                }
+            }            
+            Console.WriteLine(str.ToString());
+            Console.WriteLine();
+        }
     }
 }

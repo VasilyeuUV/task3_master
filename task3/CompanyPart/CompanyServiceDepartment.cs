@@ -69,13 +69,14 @@ namespace task3.CompanyPart
             if (this.Terminals.Count < 1) { return false; }
 
             OnProposedAgreement += person.BuyService;
-            person.PBXStatus.OnSignedAgreement += SubscriberRegistration;           
+            person.PBXStatus.OnSignedAgreement += SubscriberRegistration;
 
-            ProposeAgreement();            
+            PBXContractDocument contract = GetPBXContract();
+            ProposeAgreement(contract);            
 
             if (person.PBXStatus as CompanySubscriberBase == null)
             {
-                person.PBXStatus = new CompanySubscriberBase();
+                person.PBXStatus = new CompanySubscriberBase(contract);
                 (person.PBXStatus as CompanySubscriberBase).OnRequestCallReport += GetCallReport;
             }
 
@@ -102,9 +103,8 @@ namespace task3.CompanyPart
         //################################################################################################################
 
         public event EventHandler OnProposedAgreement;
-        private void ProposeAgreement()
-        {
-            PBXContractDocument contract = GetPBXContract();
+        private void ProposeAgreement(PBXContractDocument contract)
+        {            
             OnProposedAgreement?.Invoke(contract, EventArgs.Empty);
         }
 
