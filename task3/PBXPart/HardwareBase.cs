@@ -1,14 +1,23 @@
-﻿namespace task3.PBXPart
+﻿using System;
+
+namespace task3.PBXPart
 {
     public abstract class HardwareBase
     {
+        internal event Action OnPowerChange = delegate { };
 
+        public bool IsPowered { get; private set; } = false;
 
+        internal void PowerOn()
+        {
+            this.IsPowered = true;
+            OnPowerChange();
+        }
 
-        public bool IsPowered { get; protected set; } = false;
-
-        public void PowerOn() => this.IsPowered = true;
-        public void PowerOff() => this.IsPowered = false;
-
+        internal void PowerOff()
+        {
+            this.IsPowered = false;
+            OnPowerChange();
+        }
     }
 }

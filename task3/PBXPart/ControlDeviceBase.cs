@@ -4,6 +4,22 @@
     {
 
 
+        internal ControlDeviceBase()
+        {
+            this.OnPowerChange += ControlDeviceBase_OnPowerChange;
+        }
+
+        private void ControlDeviceBase_OnPowerChange()
+        {
+            if (this.IsPowered)
+            {
+            }
+            else
+            {
+            }
+        }
+
+
 
 
 

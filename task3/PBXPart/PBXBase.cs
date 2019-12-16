@@ -23,7 +23,26 @@ namespace task3.PBXPart
         private PBXBase()
         {             
             this._controlDevice = new ControlDeviceBase(); 
-            this._switchSystem = SwitchSystemBase.CreateInstance(Const.SWITCHDEVICE_COUNT_DEFAULT);           
+            this._switchSystem = SwitchSystemBase.CreateInstance(Const.SWITCHDEVICE_COUNT_DEFAULT);
+
+            this.OnPowerChange += PBXBase_OnPowerChange;
+        }
+
+        /// <summary>
+        /// Power control
+        /// </summary>
+        private void PBXBase_OnPowerChange()
+        {
+            if (this.IsPowered)
+            {
+                this._controlDevice.PowerOn();
+                this._switchSystem.PowerOn();
+            }
+            else
+            {
+                this._controlDevice.PowerOff();
+                this._switchSystem.PowerOff();
+            }
         }
 
         /// <summary>
@@ -31,9 +50,11 @@ namespace task3.PBXPart
         /// </summary>
         /// <returns></returns>
         internal static PBXBase CreateInstance() 
-        { 
+        {
             return new PBXBase(); 
         }
+
+
 
         /// <summary>
         /// Get terminals from SwitchSystem

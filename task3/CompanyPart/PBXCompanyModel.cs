@@ -41,15 +41,6 @@ namespace task3.CompanyPart
             company.Service.RegisterHandler(
                 new CompanyServiceDepartment.GetDataHandler(company._companyDB.GetData));
 
-            //company.Service.RegisterHandler(
-            //    new CompanyServiceDepartment.SetDataHandler(company._companyDB.SaveContract));
-            //company.Service.RegisterHandler(
-            //    new CompanyServiceDepartment.SetDataHandler(company._companyDB.SetTerminal));
-
-            //TerminalBase.OnCreated += company.Service.SetTerminal;
-
-
-
             return company;
         }
 

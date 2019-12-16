@@ -21,7 +21,29 @@ namespace task3.PBXPart
         /// </summary>
         /// <param name="switchDeviceCount"></param>
         private SwitchSystemBase()
-        {            
+        {
+            this.OnPowerChange += SwitchSystemBase_OnPowerChange;
+        }
+
+        /// <summary>
+        /// Power control
+        /// </summary>
+        private void SwitchSystemBase_OnPowerChange()
+        {
+            if (this.IsPowered)
+            {
+                foreach (var item in this.SwitchDevices)
+                {
+                    item.PowerOn();
+                }
+            }
+            else
+            {
+                foreach (var item in this.SwitchDevices)
+                {
+                    item.PowerOff();
+                }
+            }
         }
 
 
