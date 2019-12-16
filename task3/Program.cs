@@ -11,6 +11,9 @@ namespace task3
 {
     class Program
     {
+        const int CALLCOUNT = 20;
+
+
         static void Main(string[] args)
         {
             PBXCompanyModel company = PBXCompanyModel.CreateInstance();
@@ -35,7 +38,7 @@ namespace task3
                     {
                         persons[i] = person;
                     }
-                }
+                }             
             }
 
 
@@ -44,21 +47,19 @@ namespace task3
             Console.WriteLine("Press any key to continue.");
             Console.ReadKey();
 
-            person = CallingProcess(persons);
+           
 
-            Console.ReadKey();
-        }
-
-        private static Person CallingProcess(Person[] persons)
-        {
-            Person person;
-            Console.Clear();
-
-            int second = 0;
-            ConsoleKeyInfo cki = new ConsoleKeyInfo();
+            int second = 0;        
+            //ConsoleKeyInfo cki = new ConsoleKeyInfo();
             do
             {
-                Thread.Sleep(100);
+                if (++second < 5)
+                {
+                    Thread.Sleep(2000);
+                }
+
+                
+                Console.Clear();
 
                 person = persons[Const.RND.Next(0, Const.SWITCHDEVICE_COUNT_DEFAULT)];
                 Console.WriteLine($"Selected Person {person.PersonalInfo.PersonalId}.");
@@ -66,8 +67,7 @@ namespace task3
                 int operation = Const.RND.Next(0, Const.SWITCHDEVICE_COUNT_DEFAULT);
                 if (operation < 1)
                 {
-                    Console.WriteLine($"- operation: Get Call Report.");
-                    var subscriber = person.PBXStatus as CompanySubscriberBase;
+                    Console.WriteLine($"- operation: Get Call Report.");                   
                     //subscriber.RequestCallReport();
                 }
                 else
@@ -78,23 +78,43 @@ namespace task3
                     if (terminal.IsReady)
                     {
                         Console.WriteLine($"-- terminal ready");
-                        int number = Const.RND.Next(0, Const.SWITCHDEVICE_COUNT_DEFAULT);
+                        int number = Const.RND.Next(1, Const.SWITCHDEVICE_COUNT_DEFAULT);
                         Console.WriteLine($"-- call number {number}");
 
                         Console.WriteLine($"--- start call");
                         terminal.Call(number);
-
                     }
                 }
                 Console.WriteLine($"");
-                Console.ReadKey();
+                //Console.ReadKey();
 
-                if (Console.KeyAvailable == true)
-                {
-                    cki = Console.ReadKey(true);
-                }
-            } while (cki.Key != ConsoleKey.Escape || second < Int32.MaxValue);
-            return person;
+                //if (Console.KeyAvailable == true)
+                //{
+                //    cki = Console.ReadKey(true);
+                //}
+            } while (/*cki.Key != ConsoleKey.Escape ||*/ second < CALLCOUNT);
+
+
+            Console.Clear();
+
+            var subscriber = person.PBXStatus as CompanySubscriberBase;
+            if (subscriber != null)
+            {
+                var terminalNumber = subscriber.Contracts.First();
+                Console.WriteLine($"Information about calls from number {terminalNumber}");
+                subscriber.RequestCallReport(terminalNumber, Const.GetInfo.CallReport);
+
+            }
+
+            
+
+
+
+
+            Console.WriteLine($"Press any key to Exit");
+            Console.ReadKey();
         }
+        
+
     }
 }

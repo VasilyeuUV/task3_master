@@ -6,6 +6,7 @@ using task3.CompanyPart.Documents.ContractPart;
 using task3.CompanyPart.Interfaces;
 using task3.PBXPart;
 using task3.PersonPart;
+using task3.Tools;
 
 namespace task3.CompanyPart
 {
@@ -21,13 +22,12 @@ namespace task3.CompanyPart
         /// </summary>
         internal CompanyServiceDepartment()
         {
-            this.Terminals = new List<TerminalBase>();
-            
+            this.Terminals = new List<TerminalBase>();            
         }
 
 
         internal delegate void SetDataHandler(IDataable data);
-        internal delegate IDataable GetDataHandler(int id);
+        internal delegate IEnumerable<IDataable> GetDataHandler(int id, Const.GetInfo info);
 
         internal SetDataHandler SetDataDlgt;
         internal GetDataHandler GetDataDlgt;
@@ -69,13 +69,14 @@ namespace task3.CompanyPart
             if (this.Terminals.Count < 1) { return false; }
 
             OnProposedAgreement += person.BuyService;
-            person.PBXStatus.OnSignedAgreement += SubscriberRegistration;
+            person.PBXStatus.OnSignedAgreement += SubscriberRegistration;           
 
             ProposeAgreement();            
 
             if (person.PBXStatus as CompanySubscriberBase == null)
             {
                 person.PBXStatus = new CompanySubscriberBase();
+                (person.PBXStatus as CompanySubscriberBase).OnRequestCallReport += GetCallReport;
             }
 
             person.TakeTerminal(selectedTerminal);
@@ -85,6 +86,12 @@ namespace task3.CompanyPart
 
             return true;
         }
+
+
+
+
+
+
 
 
 
@@ -120,6 +127,16 @@ namespace task3.CompanyPart
                 SetDataDlgt(contract);
             }                     
         }
+
+
+
+        private IEnumerable<IDataable> GetCallReport(PBXContractDocument contract, Const.GetInfo info)
+        {
+            if (contract == null) { return null; }
+            return GetDataDlgt(contract.Id, info);
+
+        }
+
 
         #endregion //EVENT HANDLERS
 

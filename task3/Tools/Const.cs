@@ -11,6 +11,9 @@ namespace task3.Tools
 
         internal static readonly Random RND = new Random();
 
-        
+        internal enum GetInfo
+        {
+            CallReport = 1
+        }
     }
 }

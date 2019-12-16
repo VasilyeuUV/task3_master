@@ -65,6 +65,7 @@
     <Compile Include="CompanyPart\DB\ContractPart\TariffItem.cs" />
     <Compile Include="CompanyPart\DB\ContractPart\TerminalItem.cs" />
     <Compile Include="CompanyPart\DB\PBXCompanyDataBase.cs" />
+    <Compile Include="CompanyPart\Documents\CallReportItem.cs" />
     <Compile Include="CompanyPart\Documents\PBXContractDocument.cs" />
     <Compile Include="CompanyPart\Interfaces\IDataable.cs" />
     <Compile Include="CompanyPart\PBXCompanyModel.cs" />

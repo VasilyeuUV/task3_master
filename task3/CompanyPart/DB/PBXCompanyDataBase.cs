@@ -51,10 +51,48 @@ namespace task3.CompanyPart.DB
             this.TerminalTable = new HashSet<TerminalItem>();
         }
 
-        internal IDataable GetData(int id = 0)
+        internal IEnumerable<IDataable> GetData(int contractId, Const.GetInfo info)
         {
-            return null;
+
+            switch (info)
+            {
+                case Const.GetInfo.CallReport:
+                    return GetCallReport(contractId, DateTime.Now.AddMonths(-1), DateTime.Now);
+                default:
+                    return null;
+            }
         }
+
+
+
+        /// <summary>
+        /// Get Call information
+        /// </summary>
+        /// <param name="dtg"></param>
+        /// <param name="now"></param>
+        /// <returns></returns>
+        private IEnumerable<CallReportItem> GetCallReport(int contractId, DateTime dtg, DateTime now)
+        {
+            var lst = CallsTable.Where(x => x.From == contractId
+                                         && x.DTG >= dtg
+                                         && x.DTG <= now)
+                                .ToList();
+            List<CallReportItem> result = new List<CallReportItem>();
+            foreach (var item in lst)
+            {
+                result.Add(new CallReportItem(item));
+            }
+
+            return result.OrderByDescending(x => x.CallDTG);
+
+        }
+
+
+
+
+
+
+
 
 
         /// <summary>
