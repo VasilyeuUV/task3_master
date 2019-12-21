@@ -9,19 +9,12 @@ namespace task3.CompanyPart.DB.ContractPart
         /// </summary>
         internal int Id { get; private set; } = 0;
 
-        ///// <summary>
-        ///// Terminal number
-        ///// </summary>
-        //internal int Number { get; private set; } = 0;
-
-
         /// <summary>
         /// CTOR
         /// </summary>
         internal TerminalItem(TerminalBase terminal)
         {
             this.Id = terminal.Number;
-            //this.Number = terminal.Number;
         }
 
     }

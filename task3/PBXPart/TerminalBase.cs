@@ -7,6 +7,9 @@ using static task3.PBXPart.Interfaces.ITerminal;
 
 namespace task3.PBXPart
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class TerminalBase : HardwareBase, IDataable
     {
 
@@ -18,12 +21,6 @@ namespace task3.PBXPart
         internal int Number { get; set; }
 
         public bool IsReady { get; internal set; }
-
-        //public event EventHandler OnCalling;
-        //public event EventHandler OnAnswering;
-        //public event EventHandler OnBreaking;
-
-
 
         internal delegate bool CallHandler(int number, bool end = false);
         internal CallHandler CallDlgt;
@@ -58,8 +55,7 @@ namespace task3.PBXPart
             //TerminalBase.OnCreated?.Invoke(terminal, EventArgs.Empty);
             return terminal;
         }
-
-
+        
 
         private void TerminalBase_OnPowerChange()
         {
@@ -98,48 +94,6 @@ namespace task3.PBXPart
             }
             Console.WriteLine($"-- terminal {this.Number} IsPowered: {this.IsPowered}; IsReady: {this.IsReady};");
             Console.WriteLine($"-- terminal {this.Number} end call");
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /*
-        ТЕРМИНАЛ (ТЕЛЕФОН):
-        •	Имеет:
-        o	Уникальный Абонентский номер (один терминал – один абонентский номер)
-
-        •	Функционал:
-        o	Взаимодействие со станцией на основе событийной модели
-
-        •	Генерируемые события:
-        o	Запрос к АТС на установление связи с другим Терминалом
-        o	
-
-        •	Обрабатываемые события:
-        o	
-
-
-        */
-
+        }        
     }
 }

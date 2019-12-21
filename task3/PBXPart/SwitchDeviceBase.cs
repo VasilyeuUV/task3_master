@@ -26,17 +26,6 @@ namespace task3.PBXPart
         }
 
 
-
-
-
-        //internal delegate bool ConnectionHandler(int from, int to);
-        //internal ConnectionHandler ConnectionDlgt;
-        //public void RegisterHandler(ConnectionHandler dlgt)
-        //{
-        //    ConnectionDlgt = dlgt;
-        //}
-
-
         /// <summary>
         /// CTOR
         /// </summary>
@@ -82,91 +71,5 @@ namespace task3.PBXPart
                 //this.Terminal.OnPowerChange -= Terminal_OnPowerChange;
             }
         }
-
-        //private void Terminal_OnPowerChange()
-        //{
-        //    if (this.Terminal.IsPowered)
-        //    {
-        //        IsConnected = false;
-        //        OnConnected();
-        //    }
-        //    else
-        //    {
-        //        IsConnected = false;
-        //        OnConnected();
-        //    }
-        //}
-
-
-        //private void SwitchDeviceBase_OnConnected()
-        //{
-        //    Console.WriteLine($"--- switch {this.PortNumber}: IsPowered {this.IsPowered}; IsConnected {this.IsConnected}");
-        //    if (this.IsConnected)
-        //    {
-        //        this.Terminal.IsReady = false;
-        //    }
-        //    else
-        //    {
-        //        this.Terminal.IsReady = true;
-        //    }
-        //    Console.WriteLine($"--- switch {this.PortNumber}: IsPowered{this.IsPowered}; IsConnected{this.IsConnected}");
-        //}
-
-
-
-
-
-
-
-
-        //private bool ConnectTo(int number)
-        //{            
-
-        //    if (!this.IsPowered) { return false; }
-        //    if (this.IsConnected && number >= 0) { return false; }
-
-        //    if (number < 0) // break signal
-        //    {
-        //        Console.WriteLine($"--- switch {this.PortNumber} break switch {number}");
-        //        IsConnected = false;
-        //    }
-        //    else
-        //    {
-        //        Console.WriteLine($"--- switch {this.PortNumber} connectto switch {number}");
-        //        IsConnected = true;                
-        //    }
-        //    return ConnectionDlgt(this.PortNumber, number);
-        //}
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /*
-        ПОРТ ДЛЯ ПОДКЛЮЧЕНИЯ ТЕРМИНАЛА
-
-        •	Имеет:
-        o	Состояния:
-        	Вкл. / откл.;
-        	Занят / свободен
-        •	Функционал:
-        o	
-
-        •	Генерируемые события:
-        o	
-
-        •	Обрабатываемые события:
-        o	
-
-
-        */
     }
 }

@@ -20,9 +20,7 @@ namespace task3.PersonPart
                 this.PersonalId = guid;
             }
         }
-
-
-
+               
 
         /// <summary>
         /// Person status in a particular PBX company
@@ -107,8 +105,6 @@ namespace task3.PersonPart
             }
         }
 
-
-
         #endregion EVENT HANDLERS
 
 
@@ -118,22 +114,6 @@ namespace task3.PersonPart
             Terminals.Add(terminal);
             _selectedTerminals = terminal;
         }
-
-
-
     }
-
-
-
-
-    /*
-    ЧЕЛОВЕК
-    •	Имеет:
-    o	список статусов (Статус присваивает Компания (Клиент (по умолчанию) или Абонент)
-
-    •	Функционал:
-    o	Зависит от статуса
-
-    */
 }
 

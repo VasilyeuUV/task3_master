@@ -22,10 +22,7 @@ namespace task3.PBXPart
             this._switchSystem = _switchSystem;
             this.OnPowerChange += ControlDeviceBase_OnPowerChange; 
         }
-
-
-
-
+                     
         /// <summary>
         /// Control Devise On powered event
         /// </summary>

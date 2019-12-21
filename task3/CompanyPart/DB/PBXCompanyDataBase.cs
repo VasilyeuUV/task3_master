@@ -86,14 +86,7 @@ namespace task3.CompanyPart.DB
             return result.OrderByDescending(x => x.CallDTG);
 
         }
-
-
-
-
-
-
-
-
+               
 
         /// <summary>
         /// Set Data to DB
@@ -150,11 +143,7 @@ namespace task3.CompanyPart.DB
         {
             return ContractTable.FirstOrDefault(x => x.TerminalId == number);
         }
-
-
-
-
-
+               
 
         /// <summary>
         /// Set Tariff to DB
@@ -162,7 +151,7 @@ namespace task3.CompanyPart.DB
         /// <param name="data"></param>
         private void SetTariff(TariffModel tariff)
         {
-            if (TariffTable.FirstOrDefault(x => x.Name.ToLower() == tariff.Name.ToLower()) == null)
+            if (TariffTable.FirstOrDefault(x =>  x.Name.ToLower() == tariff.Name.ToLower()) == null)
             {
                 TariffTable.Add(new TariffItem(TariffTable.Count + 1, tariff));
             }
@@ -194,9 +183,7 @@ namespace task3.CompanyPart.DB
             SubscriberItem subscriber = GetSubscriber(contract);
             subscriber.Contracts.Add(contract.Id);            
         }
-
-
-                     
+                                   
 
         /// <summary>
         /// Get Subscriber

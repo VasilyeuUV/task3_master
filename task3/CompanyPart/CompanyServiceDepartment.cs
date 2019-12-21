@@ -63,8 +63,8 @@ namespace task3.CompanyPart
         /// </summary>
         internal bool AgreementConclusion(Person person)
         {
-            if (person == null) { return false; }
-            if (person.PBXStatus == null || person.PBXStatus as IPBXStatusable == null) { return false; }
+            if (person?.PBXStatus == null) { return false; }
+            //if (person.PBXStatus == null || person.PBXStatus as IPBXStatusable == null) { return false; }
 
             if (this.Terminals.Count < 1) { return false; }
 
@@ -87,17 +87,7 @@ namespace task3.CompanyPart
 
             return true;
         }
-
-
-
-
-
-
-
-
-
-
-
+               
 
         #region EVENT
         //################################################################################################################
@@ -163,10 +153,7 @@ namespace task3.CompanyPart
             }
             else 
             {
-                //contract.ContractDate = GetContractDate(id);
-                //contract.Subscriber = GetContractSubscriber(id);
-                //contract.Tariff = GetContractTariff(id);
-                //contract.Terminal = GetContractTerminal(id);
+                // realization for Subscriber
             }            
             return contract;
         }

@@ -57,27 +57,5 @@ namespace task3.CompanyPart.Documents
             tariff.Cost = t.Cost;
             return tariff;
         }
-
-
-
-        /*
-        ТАРИФНЫЙ ПЛАН
-        •	Имеет:
-        o	Id
-        o	Название
-        o	Плату за звонок
-
-        •	Функционал:
-        o	
-
-        •	Генерируемые события:
-        o	
-
-        •	Обрабатываемые события:
-        o	
-
-
-        */
-
     }
 }

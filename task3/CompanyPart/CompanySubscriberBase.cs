@@ -19,15 +19,12 @@ namespace task3.CompanyPart
         /// Link to Contracts
         /// </summary>
         internal virtual ICollection<PBXContractDocument> Contracts { get; private set; }
-
-
+        
         /// <summary>
         /// Link to Terminals
         /// </summary>
         internal virtual IEnumerable<TerminalBase> Terminals { get; set; }
-
         
-
 
         public CompanySubscriberBase(PBXContractDocument contract)
         {

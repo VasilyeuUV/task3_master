@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading;
 using task3.CompanyPart;
 using task3.CompanyPart.Documents;
-using task3.CompanyPart.Documents.ContractPart;
 using task3.PersonPart;
 using task3.Tools;
 
@@ -84,12 +83,6 @@ namespace task3
                     }
                 }
                 Console.WriteLine($"");
-                //Console.ReadKey();
-
-                //if (Console.KeyAvailable == true)
-                //{
-                //    cki = Console.ReadKey(true);
-                //}
             } while (/*cki.Key != ConsoleKey.Escape ||*/ ++second < CALLCOUNT);
 
 

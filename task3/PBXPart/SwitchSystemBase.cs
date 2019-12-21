@@ -61,31 +61,6 @@ namespace task3.PBXPart
             var swSys = new SwitchSystemBase();
             swSys.SwitchDevices = lst;
             return swSys;
-        }
-               
-
-
-
-
-
-
-
-
-        /*
-        КОММУТАТОР 
-        •	Имеет:
-        o	Список Портjd для подключения
-        o	Состояния:
-        	Вкл. / откл.;
-        •	Функционал:
-        o	
-
-        •	Генерируемые события:
-        o	
-
-        •	Обрабатываемые события:
-        o	
-
-        */
+        }           
     }
 }

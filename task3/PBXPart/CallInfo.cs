@@ -5,7 +5,6 @@ namespace task3.PBXPart
 {
     internal class CallInfo : IDataable
     {
-
         internal int OutNumber { get; set; }
         internal int IncNumber { get; set; }
         internal DateTime BeginCall { get; set; }

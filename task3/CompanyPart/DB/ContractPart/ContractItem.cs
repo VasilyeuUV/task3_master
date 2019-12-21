@@ -50,6 +50,6 @@ namespace task3.CompanyPart.DB.ContractPart
             this.TerminalId = contract.Terminal.Number;
 
         }
-
+         
     }
 }
